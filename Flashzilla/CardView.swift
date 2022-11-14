@@ -33,8 +33,8 @@ struct CardView: View {
             differentiateWithoutColor
             ? nil
             : RoundedRectangle(cornerRadius: 25, style: .continuous)
-              .fill(offset.width > 0 ? .green : .red)
-          )
+              .fill(using: offset)
+            )
           .shadow(radius: 10)
         VStack {
           if voiceOverEnabled {
@@ -82,6 +82,19 @@ struct CardView: View {
       }
       .animation(.spring(), value: offset)
     }
+}
+
+//MARK: - Shape Extension
+extension Shape {
+  func fill(using offset: CGSize) -> some View {
+    if offset.width == 0 {
+      return self.fill(.white)
+    } else if offset.width < 0 {
+      return self.fill(.red)
+    } else {
+      return self.fill(.green)
+    }
+  }
 }
 
 struct CardView_Previews: PreviewProvider {
