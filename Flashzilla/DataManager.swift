@@ -16,7 +16,7 @@ struct DataManager {
         return decoded
       }
     }
-    return []
+    return Card.exampleStack
   }
 
   static func save(_ cards: [Card]) {
